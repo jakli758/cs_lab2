@@ -110,3 +110,4 @@ optim(c(-0.2, 1), g, method="Nelder-Mead",control=list(fnscale=-1))
 
 model <- glm(y ~ x, family="binomial")
 model$iter # the number of iterations of IWLS used.
+model$coefficients

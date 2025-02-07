@@ -77,6 +77,10 @@ newton <- function(starting_point) {
   
   it <- 0
   while(TRUE) {
+    # function only defined for this range
+    stopifnot(x_t[1] > -1.5 & x_t[1] < 4 &x_t[2] > -3 &x_t[2] < 4 ) 
+    
+    
     x_t1 <- x_t - solve(hessian_g(x_t[1],x_t[2])) %*% grad_g(x_t[1],x_t[2])
     
     # use absolute stopping criterion or a maximum number of iterations
@@ -96,14 +100,14 @@ newton <- function(starting_point) {
 
 ```{r}
 newton(c(0,-1)) # finds minimum with convergence in 7 iterations
-newton(c(2,-1)) # does not find an optimum within 1000 iterations, diverges
+newton(1.6,0.6) # converges in 9 iteration
 newton(c(3,2)) # finds minimum in 7 iterations, but only local
 ```
 
 
 ### e. Investigate the candidate results which you have got. Is one of the candidates a global minimum? Which type of solutions are the other candidates?
 
-Using (0, -1) as starting value results in finding a minimum. It is even global minimum, referring to the contour plot. (3,2) gives a minimum as well, but only a local one. Starting with (3,2) does not converge as the algorithm was stopped at the maximum of 1000 iterations, it diverges.
+Using (0, -1) as starting value results in finding a minimum. It is even global minimum, referring to the contour plot. (3,2) gives a minimum as well, but only a local one. The function converges as well when starting with (1.6, 0.6) but does only find the saddle point between the two minima. 
 
 
 

@@ -61,6 +61,7 @@ newton <- function(x0,y0) {
   
   it <- 0
   while(TRUE) {
+    stopifnot(x_t[1] > -1.5 & x_t[1] < 4 &x_t[2] > -3 &x_t[2] < 4 )
     x_t1 <- x_t - solve(hessian_g(x_t[1],x_t[2])) %*% grad_g(x_t[1],x_t[2])
     
     # use absolute stopping criterion or a maximum number of iterations
@@ -77,8 +78,21 @@ newton <- function(x0,y0) {
 
 newton(0,-1) # finds minimum with convergence in 7 iterations, 
 # at the same point this is a global minimum if we look at the contour plot
-
-
+p <- seq(1.4, 2, 0.1)
+q <- seq(-0.5,1, 0.1)
+for (i in p){
+  for(j in q){
+    m <- newton(i,j)
+    if (m[3]<1000){
+      print(m)
+      cat("x:",i,"\n")
+      cat("y:",j,"\n")
+    }
+  }
+}
+newton(1.6,0.6)
 newton(2,-1) # does not find an optimum within 1000 iterations, diverges
 newton(3,2) # finds minimum in 7 iterations, but only local
 newton(1.5,0.5)
+b <- newton(1,1)
+b[3]

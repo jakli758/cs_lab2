@@ -59,8 +59,8 @@ grad_g <- function(x, y) {
 
 hessian_g <- function(x, y) {
   h11 <- -sin(x+y) + 2
-  h12 <- -sin(x+y)
-  h21 <- -sin(x+y)
+  h12 <- -sin(x+y) - 2
+  h21 <- -sin(x+y) - 2
   h22 <- -sin(x+y) + 2
   return(matrix(c(h11, h12, h21, h22), nrow = 2, byrow = TRUE))
 }
@@ -99,15 +99,15 @@ newton <- function(starting_point) {
 ### d. Test several starting values such that you have examples which give at least three different results.
 
 ```{r}
-newton(c(0,-1)) # finds minimum with convergence in 7 iterations
-newton(1.6,0.6) # converges in 9 iteration
-newton(c(3,2)) # finds minimum in 7 iterations, but only local
+newton(c(0,-1)) # finds minimum with convergence in 3 iterations
+newton(c(2,-1)) # converges in 3 iteration
+newton(c(3,1)) # finds minimum in 2 iterations, but only local
 ```
 
 
 ### e. Investigate the candidate results which you have got. Is one of the candidates a global minimum? Which type of solutions are the other candidates?
 
-Using (0, -1) as starting value results in finding a minimum. It is even global minimum, referring to the contour plot. (3,2) gives a minimum as well, but only a local one. The function converges as well when starting with (1.6, 0.6) but does only find the saddle point between the two minima. 
+Using (0, -1) as starting value results in finding a minimum. It is even global minimum, referring to the contour plot. (3,1) gives a minimum as well, but only a local one. The function converges as well when starting with (2,-1) but only finds the saddle point between the two minima. 
 
 
 
@@ -279,8 +279,8 @@ grad_g <- function(x, y) {
 
 hessian_g <- function(x, y) {
   h11 <- -sin(x+y) + 2
-  h12 <- -sin(x+y)
-  h21 <- -sin(x+y)
+  h12 <- -sin(x+y) - 2
+  h21 <- -sin(x+y) - 2
   h22 <- -sin(x+y) + 2
   return(matrix(c(h11, h12, h21, h22), nrow = 2, byrow = TRUE))
 
